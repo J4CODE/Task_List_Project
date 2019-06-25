@@ -123,7 +123,7 @@ function removeTask(e) {
     }
   }
 }
-// Remove from LS
+// Remove from Local Storage
 function removeTaskFromLocalStorage (taskItem) {
   let tasks;
   if (localStorage.getItem("tasks") === null) {
@@ -139,4 +139,23 @@ function removeTaskFromLocalStorage (taskItem) {
   });
 
   localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+// Clear Tasks
+function clearTasks() {
+  /* This is one way written in JS to clear all of the tasks.
+
+  taskList.innerHTML = '';*/
+
+  // This is the second way written in JS, using while and removeChild, to clear tasks and works Faster.
+  while (taskList.firstChild) {
+    taskList.removeChild(taskList.firstChild);
+  }
+
+  // Clear from Local Storage
+  clearTasksFromLocalStorage();
+}
+
+// Clear Tasks from Local Storage
+function clearTasksFromLocalStorage(){
+  localStorage.clear();
 }
