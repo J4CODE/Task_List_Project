@@ -112,3 +112,14 @@ function storeTaskInLocalStorage(task) {
   tasks.push(task);
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+// Remove a task
+function removeTask(e) {
+  if (e.target.parentElement.classList.contains("delete-item")) {
+    if (confirm("Are You Sure?")) {
+      e.target.parentElement.parentElement.remove();
+
+      // Remove from LS
+      removeTaskFromLocalStorage(e.target.parentElement.parentElement);
+    }
+  }
+}
