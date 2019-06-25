@@ -1,8 +1,8 @@
-// Defining all the UI variables
-const form      = document.querySelector("#task-form");
-const taskList  = document.querySelector(".collection");
-const clearBtn  = document.querySelector(".clear-tasks");
-const filter    = document.querySelector("#filter");
+// Defined all the UI variables
+const form = document.querySelector("#task-form");
+const taskList = document.querySelector(".collection");
+const clearBtn = document.querySelector(".clear-tasks");
+const filter = document.querySelector("#filter");
 const taskInput = document.querySelector("#task");
 
 // Load All The Event Listeners
@@ -26,23 +26,24 @@ function loadEventListeners() {
   filter.addEventListener("keyup", filterTasks);
 }
 
-// Get Tasks from LS
+// Get Tasks from Local Storage
 function getTasks() {
   let tasks;
   if (localStorage.getItem("tasks") === null) {
     tasks = [];
-  } else {
+  }
+  else {
     tasks = JSON.parse(localStorage.getItem("tasks"));
   }
 
-  tasks.forEach(function(task) {
+  tasks.forEach(function (task) {
     // Create an li element
     const li = document.createElement("li");
 
     // Add a class
     li.className = "collection-item";
 
-    // Create a text node and append to li
+    // Create a text node and append it to li
     li.appendChild(document.createTextNode(task));
 
     //Create a new link element
@@ -74,7 +75,7 @@ function addTask(e) {
   // Add a class
   li.className = "collection-item";
 
-  // Create a text node and append to li
+  // Create a text node and append it to li
   li.appendChild(document.createTextNode(taskInput.value));
 
   //Create a new link element
@@ -92,7 +93,7 @@ function addTask(e) {
   // Append li to ul
   taskList.appendChild(li);
 
-  // Store in LS
+  // Store in Local Storage
   storeTaskInLocalStorage(taskInput.value);
 
   // Clear Input
@@ -100,46 +101,52 @@ function addTask(e) {
 
   e.preventDefault();
 }
+
 // Store Task
 function storeTaskInLocalStorage(task) {
   let tasks;
   if (localStorage.getItem("tasks") === null) {
     tasks = [];
-  } else {
+  }
+  else {
     tasks = JSON.parse(localStorage.getItem("tasks"));
   }
 
   tasks.push(task);
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+
 // Remove a task
 function removeTask(e) {
   if (e.target.parentElement.classList.contains("delete-item")) {
     if (confirm("Are You Sure?")) {
       e.target.parentElement.parentElement.remove();
 
-      // Remove from LS
+      // Remove from Local Storage
       removeTaskFromLocalStorage(e.target.parentElement.parentElement);
     }
   }
 }
+
 // Remove from Local Storage
-function removeTaskFromLocalStorage (taskItem) {
+function removeTaskFromLocalStorage(taskItem) {
   let tasks;
   if (localStorage.getItem("tasks") === null) {
     tasks = [];
-  } else {
+  }
+  else {
     tasks = JSON.parse(localStorage.getItem("tasks"));
   }
 
-  tasks.forEach(function(task, index){
-    if(taskItem.textContent === task){
+  tasks.forEach(function (task, index) {
+    if (taskItem.textContent === task) {
       tasks.splice(index, 1);
     }
   });
 
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
+
 // Clear Tasks
 function clearTasks() {
   /* This is one way written in JS to clear all of the tasks.
@@ -156,6 +163,6 @@ function clearTasks() {
 }
 
 // Clear Tasks from Local Storage
-function clearTasksFromLocalStorage(){
+function clearTasksFromLocalStorage() {
   localStorage.clear();
 }
